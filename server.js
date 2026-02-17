@@ -9,8 +9,8 @@ const socketIo = require('socket.io');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log("Server running on port", PORT);
+const server = app.listen(port, () => {
+  console.log("Server running on port " + port);
 });
 
 //const port = 5000; // The port your backend will run on
