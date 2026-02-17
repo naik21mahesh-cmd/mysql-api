@@ -8,14 +8,11 @@ const socketIo = require('socket.io');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const server = app.listen(port, () => {
-  console.log("Server running on port " + port);
+const server = app.listen(PORT, () => {
+  console.log("Server running on port " + PORT);
 });
 
-//const port = 5000; // The port your backend will run on
-//app.use(express.json());
-// Use CORS to allow requests from your React app (default: http://localhost:3000)
-//app.use(cors());
+
 
 // Configure the MySQL connection
 const db = mysql.createConnection({
