@@ -149,12 +149,13 @@ app.get('/api/getLogs', (req, res) => {
 
   sql += ' ORDER BY log_datetime DESC ';
   db.query(sql, queryParams, (err, results) => {
-    if (err) {
-      res.status(500).send(err);
-      return;
-    }
-    res.json(results);
-  });
+  if (err) {
+    console.error("SQL ERROR:", err);  // add this
+    return res.status(500).json(err);
+  }
+  res.json(results);
+});
+
 });
 
 // Define an API endpoint to get unique device details from daily_logs
