@@ -17,7 +17,7 @@ const server = app.listen(PORT, () => {
 
 
 // Configure the MySQL connection
-const db = mysql.createConnection({
+const db = mysql.createPool({
   host: 'srv1113.hstgr.io', // Your MySQL host
   user: 'u872433678_foodcart', // Your MySQL username
   password: '5DfT:uvf17=', // Your MySQL password
@@ -27,13 +27,7 @@ const db = mysql.createConnection({
 });
 
 // Connect to the database
-db.connect(err => {
-  if (err) {
-    console.error('Error connecting to the database:', err);
-    return;
-  }
-  console.log('Connected to the MySQL database.');
-});
+ 
 
 // Login User
 app.post('/api/login', async (req, res) => {
@@ -149,13 +143,12 @@ app.get('/api/getLogs', (req, res) => {
 
   sql += ' ORDER BY log_datetime DESC ';
   db.query(sql, queryParams, (err, results) => {
-  if (err) {
-    console.error("SQL ERROR:", err);  // add this
-    return res.status(500).json(err);
-  }
-  res.json(results);
-});
-
+    if (err) {
+      res.status(500).send(err);
+      return;
+    }
+    res.json(results);
+  });
 });
 
 // Define an API endpoint to get unique device details from daily_logs
